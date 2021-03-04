@@ -70,3 +70,7 @@ body {
   white-space: pre-line;
   width: 100%;
 }
+
+#app-content-table * {
+  border: 1px solid #ccc;
+}

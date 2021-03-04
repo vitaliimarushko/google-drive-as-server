@@ -8,25 +8,42 @@
   <title>Document</title>
   <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
   <link rel="stylesheet" href="css/styles.css">
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="js/axios.min.js"></script>
 </head>
 <body>
-  <div class="app-header">
-    <img
-      src="img/monobank-cat-min.png"
-      class="app-logo"
-      alt="cat"
-    >
-    <input
-      id="app-get-content-btn"
-      class="app-btn"
-      type="button"
-      value="Get content"
-    />
-  </div>
-  <div class="app-request-content">
-    <div id="app-content-data">Content will be here...</div>
-  </div>
+
+<!--  <div class="app-header">-->
+<!--    <img-->
+<!--      src="img/monobank-cat-min.png"-->
+<!--      class="app-logo"-->
+<!--      alt="cat"-->
+<!--    >-->
+<!--    <input-->
+<!--      id="app-get-content-btn"-->
+<!--      class="app-btn"-->
+<!--      type="button"-->
+<!--      value="Get content"-->
+<!--    />-->
+<!--  </div>-->
+<!--  <div class="app-request-content">-->
+<!--    <div id="app-content-data">Content will be here...</div>-->
+<!--  </div>-->
+
+  <table id="app-content-table">
+    <tr class="app-header-row">
+      <th>
+        Name
+      </th>
+      <th>
+        Price
+      </th>
+      <th>
+        Description
+      </th>
+    </tr>
+  </table>
+
   <script src="js/script.js"></script>
+
 </body>
 </html>

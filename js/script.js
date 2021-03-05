@@ -19,18 +19,6 @@ const csvToJson = csv => {
   return result;
 };
 
-// axios.interceptors.response.use((response) => {
-//   console.log('response', response);
-//   return response
-// }, (error) => {
-//   console.log('error', error);
-//   if (error.response && error.response.data && error.response.data.location) {
-//     // window.location = error.response.data.location
-//   } else {
-//     return Promise.reject(error)
-//   }
-// });
-
 const makeRequest = async url => {
   let content = null;
   const requestParams = {
@@ -38,19 +26,13 @@ const makeRequest = async url => {
     timeout: 30000,
     headers: {
       'Cache-Control': 'no-cache',
-      // accept: 'text/plain',
-      // 'Content-Type': 'text/plain',
-      // 'Content-Type': 'text/html',
     },
-    // withCredentials: true,
-    // maxRedirects: 0,
-    // responseType: 'blob',
-    // responseType: 'text',
+    responseType: 'text',
   };
 
   try {
     const response = await axios(requestParams) || {};
-    content = response.data;
+    content = response.data || null;
   } catch (ex) {
     console.error(ex);
     return false;
@@ -70,16 +52,16 @@ const loadedCb = async () => {
   // byId('app-get-content-btn').addEventListener('click', loadContent);
 
   const tableRow = document.getElementsByClassName('app-header-row')[0];
-  const content = await makeRequest('data/catalog.json');
-
-  // console.log('content', content);
-  //
-  // const csv = csvToJson(content);
+  const content = await makeRequest('data/catalog');
+  const csv = csvToJson(content);
   let htmlContent = '';
 
-  for (const csvElement of content) {
+  for (const csvElement of csv) {
     const tr = `
       <tr>
+        <td>
+          ${csvElement.category}
+        </td>
         <td>
           ${csvElement.name}
         </td>

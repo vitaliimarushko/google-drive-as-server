@@ -1,0 +1,17 @@
+[
+  {
+    "name": "pen",
+    "price": "$1.25",
+    "description": "Just a pen to write on paper"
+  },
+  {
+    "name": "eraser",
+    "price": "$0.70",
+    "description": "Eraser can clean your mind!"
+  },
+  {
+    "name": "pencil",
+    "price": "$0.85",
+    "description": "Colorize your life..."
+  }
+]

@@ -19,6 +19,18 @@ const csvToJson = csv => {
   return result;
 };
 
+// axios.interceptors.response.use((response) => {
+//   console.log('response', response);
+//   return response
+// }, (error) => {
+//   console.log('error', error);
+//   if (error.response && error.response.data && error.response.data.location) {
+//     // window.location = error.response.data.location
+//   } else {
+//     return Promise.reject(error)
+//   }
+// });
+
 const makeRequest = async url => {
   let content = null;
   const requestParams = {
@@ -27,21 +39,18 @@ const makeRequest = async url => {
     headers: {
       'Cache-Control': 'no-cache',
       // accept: 'text/plain',
+      // 'Content-Type': 'text/plain',
+      // 'Content-Type': 'text/html',
     },
-    transformResponse: [data => {
-      // Do whatever you want to transform the data
-      console.log('data', data);
-
-      return data;
-    }],
-    withCredentials: true,
-    maxRedirects: 0,
-    responseType: 'blob',
+    // withCredentials: true,
+    // maxRedirects: 0,
+    // responseType: 'blob',
+    // responseType: 'text',
   };
 
   try {
     const response = await axios(requestParams) || {};
-    content = await response.data.text();
+    content = response.data;
   } catch (ex) {
     console.error(ex);
     return false;
@@ -61,32 +70,32 @@ const loadedCb = async () => {
   // byId('app-get-content-btn').addEventListener('click', loadContent);
 
   const tableRow = document.getElementsByClassName('app-header-row')[0];
-  const content = await makeRequest('data/catalog.csv');
+  const content = await makeRequest('data/catalog.json');
 
-  console.log('content', content);
-
+  // console.log('content', content);
+  //
   // const csv = csvToJson(content);
-  // let htmlContent = '';
-  //
-  // for (const csvElement of csv) {
-  //   const tr = `
-  //     <tr>
-  //       <td>
-  //         ${csvElement.name}
-  //       </td>
-  //       <td>
-  //         ${csvElement.price}
-  //       </td>
-  //       <td>
-  //         ${csvElement.description || '-'}
-  //       </td>
-  //     </tr>
-  //   `;
-  //
-  //   htmlContent += tr;
-  // }
-  //
-  // tableRow.insertAdjacentHTML('afterend', htmlContent);
+  let htmlContent = '';
+
+  for (const csvElement of content) {
+    const tr = `
+      <tr>
+        <td>
+          ${csvElement.name}
+        </td>
+        <td>
+          ${csvElement.price}
+        </td>
+        <td>
+          ${csvElement.description || '-'}
+        </td>
+      </tr>
+    `;
+
+    htmlContent += tr;
+  }
+
+  tableRow.insertAdjacentHTML('afterend', htmlContent);
 };
 
 document.addEventListener('DOMContentLoaded', loadedCb, false);
